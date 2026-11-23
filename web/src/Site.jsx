@@ -168,7 +168,7 @@ export default function Site() {
             <div className="phone"><div className="phone__screen">
               <div style={{ background: 'var(--green-d)', padding: '28px 16px 14px' }}><Logo size={24} /></div>
               <div style={{ padding: 14 }}>
-                <div className="promo" style={{ minHeight: 190 }}><img src="/img/karto-medium.png" alt="" style={{ width: '58%' }} />
+                <div className="promo" style={{ minHeight: 190 }}><img src="/img/karto-medium-v3.png" alt="" style={{ width: '58%' }} />
                   <div className="promo__txt" style={{ padding: 16 }}><h2 style={{ fontSize: 22 }}>{t('whatToday')}</h2></div></div>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 8, marginTop: 14 }}>
                   {menu.sizes.map((s) => <div key={s.id} className="opt" style={{ background: sizeBg[s.id], color: s.id === 's' ? 'var(--ink)' : '#fff', fontSize: 13 }}>{L(s.name)}</div>)}

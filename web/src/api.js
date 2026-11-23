@@ -28,7 +28,6 @@ export async function api(path, opts = {}) {
 export function linePrice(item, menu) {
   const size = menu.sizes.find((s) => s.id === item.size);
   let p = size ? size.price : 0;
-  p += Math.max(0, item.seasonings.length - 1) * menu.extraSeasoningPrice;
   for (const [id, q] of Object.entries(item.sauces || {})) { const s = menu.sauces.find((x) => x.id === id); if (s) p += s.price * q; }
   for (const [id, q] of Object.entries(item.drinks || {})) { const d = menu.drinks.find((x) => x.id === id); if (d) p += d.price * q; }
   return p * (item.qty || 1);

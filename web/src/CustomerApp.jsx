@@ -42,7 +42,7 @@ function Home() {
         <div><div className="muted" style={{ fontSize: 15 }}>{t('hi')}</div><h2 style={{ fontSize: 26, fontWeight: 900 }}>{t('whatToday')}</h2></div>
       </div>
       <div className="promo">
-        <img src="/img/karto-medium.png" alt="" />
+        <img src="/img/karto-medium-v3.png" alt="" />
         <div className="promo__txt">
           <span className="kicker" style={{ color: 'var(--yellow)', fontSize: 12 }}><Sparkle size={14} /> {t('heroSlogan')}</span>
           <h2 style={{ marginTop: 8 }}>{t('build')}<em>KARTO!</em></h2>
@@ -60,8 +60,7 @@ function Home() {
           </button>
         ))}
       </div>
-      <div className="h-title">{t('popular')}</div>
-      <div className="combos">
+      {menu.combos.length > 0 && <><div className="h-title">{t('popular')}</div><div className="combos">
         {menu.combos.map((c) => {
           const price = linePrice({ size: c.size, seasonings: c.seasonings, sauces: Object.fromEntries(c.sauces.map((s) => [s, 1])) }, menu);
           return (
@@ -73,7 +72,7 @@ function Home() {
             </button>
           );
         })}
-      </div>
+      </div></>}
       <div className="h-title">{t('rewards')}</div>
       <Rewards />
     </motion.div>
@@ -113,7 +112,7 @@ function Build() {
   const [sauces, setSauces] = useState(combo ? Object.fromEntries(combo.sauces.map((s) => [s, 1])) : {});
   const [drinks, setDrinks] = useState({});
   const [added, setAdded] = useState(false);
-  const max = menu.maxSeasonings || 3;
+  const max = menu.sizes.find((s) => s.id === size)?.maxSeasonings || menu.maxSeasonings || 3;
   const item = { size, packaging: pack, seasonings: seas, sauces, drinks, qty: 1 };
   const price = linePrice(item, menu);
   const img = menu.sizes.find((s) => s.id === size)?.img;
@@ -132,7 +131,7 @@ function Build() {
       <div className="sec-title"><h3>1. {t('chooseSize')}</h3></div>
       <div className="opt-grid opt-grid--3">
         {menu.sizes.filter(avail).map((s) => (
-          <button key={s.id} type="button" className="opt opt--size" aria-pressed={size === s.id} onClick={() => setSize(s.id)}>
+          <button key={s.id} type="button" className="opt opt--size" aria-pressed={size === s.id} onClick={() => { setSize(s.id); setSeas((cur) => cur.slice(0, s.maxSeasonings || 3)); }}>
             {size === s.id && <span className="opt__check">✓</span>}
             <img src={s.img} alt={L(s.package)} loading="lazy" />
             <div style={{ fontFamily: 'var(--display)', fontWeight: 900, fontSize: 17 }}>{L(s.name)}</div>
@@ -142,7 +141,7 @@ function Build() {
       </div>
 
       <div className="sec-title"><h3>2. {t('chooseSeason')}</h3><span className="counter">{seas.length}/{max}</span></div>
-      <p className="muted" style={{ margin: '0 0 10px', fontSize: 14 }}>{t('upTo3')} · {t('firstFree')}, +{fmt(menu.extraSeasoningPrice, lang)}</p>
+      <p className="muted" style={{ margin: '0 0 10px', fontSize: 14 }}>{t('upTo3').replace('{n}', max)} · {t('firstFree')}</p>
       <div className="season-grid">
         {menu.seasonings.filter(avail).map((s) => {
           const on = seas.includes(s.id);

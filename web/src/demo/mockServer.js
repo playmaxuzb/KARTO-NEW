@@ -33,16 +33,14 @@ function load() {
       db.menu = { ...defaults, ...(db.menu || {}) };
       db.menu.sizes = (db.menu.sizes || defaults.sizes).map((item) => {
         const fresh = defaults.sizes.find((x) => x.id === item.id);
-        return fresh ? { ...fresh, ...item, name: { ...fresh.name, ...item.name, ar: fresh.name.ar }, img: fresh.img, package: fresh.package } : item;
+        return fresh ? { ...fresh, ...item, name: { ...fresh.name, ...item.name, ar: fresh.name.ar }, price: fresh.price, maxSeasonings: fresh.maxSeasonings, img: fresh.img, package: fresh.package } : item;
       });
       db.menu.packaging = (db.menu.packaging || defaults.packaging).map((item) => {
         const fresh = defaults.packaging.find((x) => x.id === item.id);
         return fresh ? { ...fresh, ...item, img: fresh.img, thumb: fresh.thumb, name: fresh.name, desc: fresh.desc } : item;
       });
-      db.menu.combos = (db.menu.combos || defaults.combos).map((item) => {
-        const fresh = defaults.combos.find((x) => x.id === item.id);
-        return fresh ? { ...fresh, ...item, img: fresh.img, name: fresh.name } : item;
-      });
+      db.menu.combos = [];
+      db.menu.extraSeasoningPrice = 0;
       for (const key of ['seasonings', 'sauces', 'drinks']) {
         db.menu[key] = (db.menu[key] || defaults[key]).map((item) => {
           const fresh = defaults[key].find((x) => x.id === item.id);
@@ -74,11 +72,11 @@ function need(db, headers, ...roles) { const s = staffOf(db, headers); if (!s) e
 function priceItem(it, menu) {
   const size = menu.sizes.find((s) => s.id === it.size && s.available !== false); if (!size) err(400, 'Size not available');
   if (!menu.packaging.find((p) => p.id === it.packaging && p.available !== false)) err(400, 'Packaging not available');
-  const seas = [...new Set(it.seasonings || [])]; const max = menu.maxSeasonings || 3;
+  const seas = [...new Set(it.seasonings || [])]; const max = size.maxSeasonings || menu.maxSeasonings || 3;
   if (seas.length < 1 || seas.length > max) err(400, 'Choose 1 to ' + max + ' seasonings');
   for (const id of seas) if (!menu.seasonings.find((s) => s.id === id && s.available !== false)) err(400, 'Seasoning not available: ' + id);
   const qty = Math.min(50, Math.max(1, int(it.qty) || 1));
-  let unit = size.price + Math.max(0, seas.length - 1) * menu.extraSeasoningPrice;
+  let unit = size.price;
   const pick = (obj, list, kind) => { const out = {}; for (const [id, q] of Object.entries(obj || {})) { const n = Math.min(20, Math.max(0, int(q))); if (!n) continue; const x = list.find((y) => y.id === id && y.available !== false); if (!x) err(400, kind + ' not available: ' + id); out[id] = n; unit += x.price * n; } return out; };
   const sauces = pick(it.sauces, menu.sauces, 'Sauce'); const drinks = pick(it.drinks, menu.drinks, 'Drink');
   return { size: size.id, grams: size.grams, packaging: it.packaging, seasonings: seas, sauces, drinks, qty, unit, total: unit * qty };

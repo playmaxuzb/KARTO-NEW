@@ -68,10 +68,11 @@ function priceItem(it, menu) {
   if (!size) throw new Error('Size not available');
   if (!menu.packaging.find((p) => p.id === it.packaging && p.available !== false)) throw new Error('Packaging not available');
   const seas = [...new Set(it.seasonings || [])];
-  if (seas.length < 1 || seas.length > (menu.maxSeasonings || 3)) throw new Error('Choose 1 to ' + (menu.maxSeasonings || 3) + ' seasonings');
+  const maxSeasonings = size.maxSeasonings || menu.maxSeasonings || 3;
+  if (seas.length < 1 || seas.length > maxSeasonings) throw new Error('Choose 1 to ' + maxSeasonings + ' seasonings');
   for (const id of seas) if (!menu.seasonings.find((s) => s.id === id && s.available !== false)) throw new Error('Seasoning not available: ' + id);
   const qty = Math.min(50, Math.max(1, int(it.qty) || 1));
-  let unit = size.price + Math.max(0, seas.length - 1) * menu.extraSeasoningPrice;
+  let unit = size.price;
   const pick = (obj, list, kind) => {
     const out = {};
     for (const [id, q] of Object.entries(obj || {})) {

@@ -97,7 +97,7 @@ function describe(i, menu, L) {
 // ---------------- POS ----------------
 function POS() {
   const tt = useT(); const { L, lang } = useLang(); const menu = useMenu();
-  const blank = { size: 'm', packaging: 'bowl', seasonings: [], sauces: {}, drinks: {}, qty: 1 };
+  const blank = { size: 'm', packaging: 'bowl', seasonings: ['classic'], sauces: {}, drinks: {}, qty: 1 };
   const [cur, setCur] = useState(blank); const [lines, setLines] = useState([]);
   const [mode, setMode] = useState('dine'); const [pay, setPay] = useState('cash'); const [disc, setDisc] = useState(0); const [cash, setCash] = useState('');
   const [msg, setMsg] = useState(null); const [last, setLast] = useState(null); const [orders, reload] = useOrders('active');
@@ -106,9 +106,10 @@ function POS() {
   useEffect(() => { loadShift(); }, []);
   const sub = lines.reduce((a, l) => a + linePrice(l, menu), 0); const total = Math.max(0, sub - (+disc || 0));
   const change = cash ? (+cash - total) : null;
-  const toggleS = (id) => setCur((c) => ({ ...c, seasonings: c.seasonings.includes(id) ? c.seasonings.filter((x) => x !== id) : c.seasonings.length < 3 ? [...c.seasonings, id] : c.seasonings }));
+  const sizeMax = menu.sizes.find((s) => s.id === cur.size)?.maxSeasonings || menu.maxSeasonings || 3;
+  const toggleS = (id) => setCur((c) => ({ ...c, seasonings: c.seasonings.includes(id) ? c.seasonings.filter((x) => x !== id) : c.seasonings.length < sizeMax ? [...c.seasonings, id] : c.seasonings }));
   const bump = (k, id, d) => setCur((c) => ({ ...c, [k]: { ...c[k], [id]: Math.max(0, (c[k][id] || 0) + d) } }));
-  const addLine = () => { if (!cur.seasonings.length) { setMsg({ e: '⚠ ' + L({ uz: 'Kamida 1 ziravor', ru: 'Минимум 1 специя', en: 'At least 1 seasoning' }) }); return; } setLines([...lines, { ...cur, key: Date.now() }]); setCur(blank); setMsg(null); };
+  const addLine = () => { if (!cur.seasonings.length) { setMsg({ e: '⚠ ' + L({ uz: 'Kamida 1 ziravor', ru: 'Минимум 1 специя', en: 'At least 1 seasoning', ar: 'اختر نكهة واحدة على الأقل' }) }); return; } setLines([...lines, { ...cur, key: Date.now() }]); setCur(blank); setMsg(null); };
   const charge = async () => {
     try {
       const o = await api('/pos/orders', { method: 'POST', body: { mode, payment: pay, discount: +disc || 0, cashReceived: pay === 'cash' ? (+cash || total) : null, items: lines.map(({ key, ...l }) => l) } });
@@ -125,22 +126,15 @@ function POS() {
       <section className="pos__build">
         <div className="pos__row">
           {menu.sizes.map((s) => (
-            <button key={s.id} className="pos-size" aria-pressed={cur.size === s.id} style={{ '--c': SIZE_BG[s.id] }} onClick={() => setCur({ ...cur, size: s.id })}>
+            <button key={s.id} className="pos-size" aria-pressed={cur.size === s.id} style={{ '--c': SIZE_BG[s.id] }} onClick={() => setCur({ ...cur, size: s.id, packaging: { s: 'cone', m: 'bowl', l: 'tray' }[s.id], seasonings: cur.seasonings.slice(0, s.maxSeasonings || 3) })}>
               <b>{L(s.name)}</b><span>{s.grams} g · {fmt(s.price, lang)}</span>
             </button>
           ))}
         </div>
-        <div className="pos__row">
-          {menu.packaging.map((p) => (
-            <button key={p.id} className="pos-pack" aria-pressed={cur.packaging === p.id} onClick={() => setCur({ ...cur, packaging: p.id })}>
-              <img src={p.img.replace('.webp', '-sm.webp')} alt="" /><span>{L(p.name)}</span>
-            </button>
-          ))}
-        </div>
-        <h3 className="pos__h">{L({ uz: 'Ziravorlar', ru: 'Специи', en: 'Seasonings' })} <span className="counter">{cur.seasonings.length}/3</span></h3>
+        <h3 className="pos__h">{L({ uz: 'Ziravorlar', ru: 'Специи', en: 'Seasonings', ar: 'النكهات' })} <span className="counter">{cur.seasonings.length}/{sizeMax}</span></h3>
         <div className="pos__chips">
           {menu.seasonings.filter((s) => s.available !== false).map((s) => (
-            <button key={s.id} className="season" aria-pressed={cur.seasonings.includes(s.id)} disabled={!cur.seasonings.includes(s.id) && cur.seasonings.length >= 3} onClick={() => toggleS(s.id)}>
+            <button key={s.id} className="season" aria-pressed={cur.seasonings.includes(s.id)} disabled={!cur.seasonings.includes(s.id) && cur.seasonings.length >= sizeMax} onClick={() => toggleS(s.id)}>
               <i className="dot" style={{ background: s.color }} />{L(s.name)}
             </button>
           ))}
@@ -148,7 +142,7 @@ function POS() {
         <div className="pos__addons">
           {[['sauces', menu.sauces], ['drinks', menu.drinks]].map(([k, list]) => (
             <div key={k}>
-              <h3 className="pos__h">{k === 'sauces' ? L({ uz: 'Souslar', ru: 'Соусы', en: 'Sauces' }) : L({ uz: 'Ichimliklar', ru: 'Напитки', en: 'Drinks' })}</h3>
+              <h3 className="pos__h">{k === 'sauces' ? L({ uz: 'Souslar', ru: 'Соусы', en: 'Sauces', ar: 'الصوصات' }) : L({ uz: 'Ichimliklar', ru: 'Напитки', en: 'Drinks', ar: 'المشروبات' })}</h3>
               {list.filter((x) => x.available !== false).map((x) => (
                 <div key={x.id} className="pos-addon">
                   <span>{L(x.name)} <small>{fmt(x.price, lang)}</small></span>
