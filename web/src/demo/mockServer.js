@@ -24,7 +24,30 @@ function seed() {
     moves: [], expenses: [], shifts: [], audit: [], counters: { invoice: 0, id: 0 },
   };
 }
-function load() { try { const s = localStorage.getItem(KEY); if (s) return JSON.parse(s); } catch {} return mem || (mem = seed()); }
+function load() {
+  try {
+    const raw = localStorage.getItem(KEY);
+    if (raw) {
+      const db = JSON.parse(raw);
+      const defaults = DEFAULT_MENU;
+      db.menu = { ...defaults, ...(db.menu || {}) };
+      db.menu.sizes = (db.menu.sizes || defaults.sizes).map((item) => {
+        const fresh = defaults.sizes.find((x) => x.id === item.id);
+        return fresh ? { ...fresh, ...item, img: fresh.img, package: fresh.package } : item;
+      });
+      db.menu.packaging = (db.menu.packaging || defaults.packaging).map((item) => {
+        const fresh = defaults.packaging.find((x) => x.id === item.id);
+        return fresh ? { ...fresh, ...item, img: fresh.img, thumb: fresh.thumb, name: fresh.name, desc: fresh.desc } : item;
+      });
+      db.menu.combos = (db.menu.combos || defaults.combos).map((item) => {
+        const fresh = defaults.combos.find((x) => x.id === item.id);
+        return fresh ? { ...fresh, ...item, img: fresh.img, name: fresh.name } : item;
+      });
+      return db;
+    }
+  } catch {}
+  return mem || (mem = seed());
+}
 function save(db) { mem = db; try { localStorage.setItem(KEY, JSON.stringify(db)); } catch {} }
 export function resetDemo() { mem = seed(); save(mem); try { localStorage.removeItem('karto-cart'); localStorage.removeItem('karto-my-orders'); localStorage.removeItem('karto-staff-token'); localStorage.removeItem('karto-staff'); } catch {} }
 
