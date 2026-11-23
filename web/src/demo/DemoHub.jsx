@@ -4,35 +4,35 @@ import { resetDemo } from './mockServer.js';
 import { useState } from 'react';
 
 const P = [
-  { to: '/site', c: 'var(--green)', fg: 'var(--cream)', t: 'موقع الشركة', who: 'للزبائن', d: 'تعريف بالبراند، المنيو والأسعار، القصة، التواصل، وزر التطبيق. بثلاث لغات.' },
-  { to: '/app', c: 'var(--yellow)', fg: 'var(--ink)', t: 'تطبيق الزبون', who: 'للزبائن · موبايل', d: 'ركّب طلبك: الحجم ← التقديم ← حتى 3 نكهات ← صوص ← مشروب. سلة، دفع، تتبع، فاتورة.' },
-  { to: '/staff', c: 'var(--orange)', fg: '#fff', t: 'الكاشير (POS)', who: 'PIN: 3333', d: 'طلبات المحل، حساب الباقي، قبول طلبات التطبيق، تسجيل الدفع، فتح وإغلاق الوردية.' },
-  { to: '/staff', c: 'var(--red)', fg: '#fff', t: 'شاشة المطبخ', who: 'PIN: 4444', d: 'الطلبات بتوصل لحالها: جديد ← قيد التحضير ← جاهز ← تم التسليم.' },
-  { to: '/staff/tv', c: 'var(--ink)', fg: 'var(--yellow)', t: 'شاشة التلفزيون', who: 'للمحل', d: 'منيو بالصور وأرقام الطلبات قيد التحضير والجاهزة.' },
-  { to: '/staff', c: 'var(--green-d)', fg: 'var(--cream)', t: 'لوحة المالك', who: 'PIN: 1111 (مالك) · 2222 (مدير)', d: 'الأرباح، الفواتير، المنيو والأسعار، المخزون، المصاريف، الموظفين، الصيانة.' },
+  { to: '/site', c: '#FFFFFF', fg: 'var(--ink)', t: 'موقع الشركة', who: 'للزبائن', d: 'تعريف بالبراند، المنيو والأسعار، القصة، التواصل، وزر التطبيق. بثلاث لغات.' },
+  { to: '/app', c: '#FFFFFF', fg: 'var(--ink)', t: 'تطبيق الزبون', who: 'للزبائن · موبايل', d: 'ركّب طلبك: الحجم ← التقديم ← حتى 3 نكهات ← صوص ← مشروب. سلة، دفع، تتبع، فاتورة.' },
+  { to: '/staff', c: '#FFFFFF', fg: 'var(--ink)', t: 'الكاشير (POS)', who: 'PIN: 3333', d: 'طلبات المحل، حساب الباقي، قبول طلبات التطبيق، تسجيل الدفع، فتح وإغلاق الوردية.' },
+  { to: '/staff', c: '#FFFFFF', fg: 'var(--ink)', t: 'شاشة المطبخ', who: 'PIN: 4444', d: 'الطلبات بتوصل لحالها: جديد ← قيد التحضير ← جاهز ← تم التسليم.' },
+  { to: '/staff/tv', c: '#FFFFFF', fg: 'var(--ink)', t: 'شاشة التلفزيون', who: 'للمحل', d: 'منيو بالصور وأرقام الطلبات قيد التحضير والجاهزة.' },
+  { to: '/staff', c: '#FFFFFF', fg: 'var(--ink)', t: 'لوحة المالك', who: 'PIN: 1111 (مالك) · 2222 (مدير)', d: 'الأرباح، الفواتير، المنيو والأسعار، المخزون، المصاريف، الموظفين، الصيانة.' },
 ];
 
 export default function DemoHub() {
   const [done, setDone] = useState(false);
   return (
     <div dir="rtl" style={{ minHeight: '100dvh', background: 'var(--cream)' }}>
-      <header style={{ background: 'var(--green-d)', color: 'var(--cream)' }}>
+      <header style={{ background: '#FFFFFF', color: 'var(--ink)', borderBottom: '3px solid var(--yellow)' }}>
         <div className="wrap" style={{ padding: '28px 0 34px', display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 22 }}>
           <Mascot size={96} />
           <div style={{ flex: '1 1 320px', minWidth: 0 }}>
             <Logo size={40} mascot={false} />
             <h1 style={{ fontSize: 'clamp(28px,4vw,44px)', fontWeight: 900, marginTop: 10 }}>النسخة التجريبية — النظام كامل</h1>
-            <p style={{ margin: '8px 0 0', fontWeight: 700, color: '#E3D5B8' }}>كل البرامج متصلة ببعض: أي طلب بتعمله بالتطبيق بيوصل للكاشير والمطبخ والتلفزيون ولوحة المالك. البيانات التجريبية محفوظة بهالمتصفح بس.</p>
+            <p style={{ margin: '8px 0 0', fontWeight: 700, color: 'var(--ink-2)' }}>كل البرامج متصلة ببعض: أي طلب بتعمله بالتطبيق بيوصل للكاشير والمطبخ والتلفزيون ولوحة المالك. هذه نسخة استعراض ببيانات تجريبية محفوظة في هذا المتصفح.</p>
           </div>
         </div>
-        <Checker color="var(--red)" />
+        <Checker color="var(--yellow)" />
       </header>
       <main className="wrap" style={{ padding: '36px 0 60px' }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(280px,1fr))', gap: 18 }}>
           {P.map((p) => (
             <Link key={p.t} to={p.to} style={{ textDecoration: 'none', color: 'inherit' }}>
-              <div style={{ background: 'var(--paper)', border: '3px solid var(--ink)', borderRadius: 26, overflow: 'hidden', boxShadow: '6px 6px 0 var(--ink)', height: '100%', display: 'flex', flexDirection: 'column' }}>
-                <div style={{ background: p.c, color: p.fg, padding: '18px 20px' }}>
+              <div style={{ background: '#FFFFFF', border: '2px solid var(--yellow)', borderRadius: 26, overflow: 'hidden', boxShadow: '0 10px 26px rgba(36, 26, 20, .08)', height: '100%', display: 'flex', flexDirection: 'column' }}>
+                <div style={{ background: p.c, color: p.fg, padding: '18px 20px', borderBottom: '1px solid #F2E1B4' }}>
                   <div style={{ fontFamily: 'var(--display)', fontWeight: 900, fontSize: 24 }}>{p.t}</div>
                   <div style={{ fontWeight: 800, fontSize: 14, opacity: .9 }}>{p.who}</div>
                 </div>
