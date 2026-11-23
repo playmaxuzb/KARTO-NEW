@@ -13,19 +13,24 @@ const T = {
     ticket: 'Chek', add: 'Qo‘shish', discount: 'Chegirma', received: 'Olingan naqd', change: 'Qaytim', charge: 'To‘lovni qabul qilish', clear: 'Tozalash', empty: 'Mahsulot tanlang',
     newO: 'Yangi', prep: 'Tayyorlanmoqda', ready: 'Tayyor', start: 'Boshlash', done: 'Berildi', send: 'Kuryerga', accept: 'Qabul qilish', markPaid: 'To‘landi', unpaid: 'To‘lanmagan',
     shift: 'Smena', openShift: 'Smenani ochish', closeShift: 'Smenani yopish', openingCash: 'Boshlang‘ich naqd', counted: 'Sanalgan naqd', expected: 'Kutilgan', diff: 'Farq', noShift: 'Smena ochilmagan',
-    cancel: 'Bekor qilish', reason: 'Sabab', printed: 'Chek tayyor', mins: 'daq', table: 'Joyida', pickup: 'Olib ketish', delivery: 'Yetkazish', nowPreparing: 'Tayyorlanmoqda', nowReady: 'Tayyor — olib keting!' },
+    cancel: 'Bekor qilish', reason: 'Sabab', printed: 'Chek tayyor', mins: 'daq', table: 'Joyida', pickup: 'Olib ketish', delivery: 'Yetkazish', nowPreparing: 'Tayyorlanmoqda', nowReady: 'Tayyor — olib keting!', minus: 'kamaytirish', plus: 'oshirish', remove: 'o‘chirish', ok: 'OK' },
   ru: { login: 'Вход для сотрудников', pin: 'Введите PIN', pos: 'Касса', kds: 'Кухня', tv: 'ТВ-экран', online: 'Онлайн', admin: 'Управление', logout: 'Выйти',
     ticket: 'Чек', add: 'Добавить', discount: 'Скидка', received: 'Получено наличными', change: 'Сдача', charge: 'Принять оплату', clear: 'Очистить', empty: 'Выберите товар',
     newO: 'Новые', prep: 'Готовятся', ready: 'Готовы', start: 'Начать', done: 'Выдан', send: 'Курьеру', accept: 'Принять', markPaid: 'Оплачен', unpaid: 'Не оплачен',
     shift: 'Смена', openShift: 'Открыть смену', closeShift: 'Закрыть смену', openingCash: 'Наличные на начало', counted: 'Посчитано', expected: 'Ожидается', diff: 'Разница', noShift: 'Смена не открыта',
-    cancel: 'Отменить', reason: 'Причина', printed: 'Чек готов', mins: 'мин', table: 'В зале', pickup: 'Самовывоз', delivery: 'Доставка', nowPreparing: 'Готовятся', nowReady: 'Готово — заберите!' },
+    cancel: 'Отменить', reason: 'Причина', printed: 'Чек готов', mins: 'мин', table: 'В зале', pickup: 'Самовывоз', delivery: 'Доставка', nowPreparing: 'Готовятся', nowReady: 'Готово — заберите!', minus: 'уменьшить', plus: 'увеличить', remove: 'удалить', ok: 'ОК' },
   en: { login: 'Staff login', pin: 'Enter your PIN', pos: 'POS', kds: 'Kitchen', tv: 'TV board', online: 'Online', admin: 'Admin', logout: 'Log out',
     ticket: 'Ticket', add: 'Add', discount: 'Discount', received: 'Cash received', change: 'Change', charge: 'Take payment', clear: 'Clear', empty: 'Pick a product',
     newO: 'New', prep: 'Preparing', ready: 'Ready', start: 'Start', done: 'Handed over', send: 'To courier', accept: 'Accept', markPaid: 'Mark paid', unpaid: 'Unpaid',
     shift: 'Shift', openShift: 'Open shift', closeShift: 'Close shift', openingCash: 'Opening cash', counted: 'Counted cash', expected: 'Expected', diff: 'Difference', noShift: 'No shift open',
-    cancel: 'Cancel', reason: 'Reason', printed: 'Receipt ready', mins: 'min', table: 'Dine-in', pickup: 'Pickup', delivery: 'Delivery', nowPreparing: 'Preparing', nowReady: 'Ready — please collect!' },
+    cancel: 'Cancel', reason: 'Reason', printed: 'Receipt ready', mins: 'min', table: 'Dine-in', pickup: 'Pickup', delivery: 'Delivery', nowPreparing: 'Preparing', nowReady: 'Ready — please collect!', minus: 'decrease', plus: 'increase', remove: 'remove', ok: 'OK' },
+  ar: { login: 'دخول الموظفين', pin: 'أدخل الرقم السري', pos: 'الكاشير', kds: 'المطبخ', tv: 'شاشة العرض', online: 'طلبات الإنترنت', admin: 'الإدارة', logout: 'تسجيل الخروج',
+    ticket: 'الفاتورة', add: 'إضافة', discount: 'خصم', received: 'المبلغ المستلم', change: 'الباقي', charge: 'تسجيل الدفع', clear: 'مسح', empty: 'اختر منتجاً',
+    newO: 'جديد', prep: 'قيد التحضير', ready: 'جاهز', start: 'بدء التحضير', done: 'تم التسليم', send: 'للتوصيل', accept: 'قبول', markPaid: 'مدفوع', unpaid: 'غير مدفوع',
+    shift: 'الوردية', openShift: 'فتح الوردية', closeShift: 'إغلاق الوردية', openingCash: 'نقدية البداية', counted: 'النقدية المعدودة', expected: 'المتوقع', diff: 'الفرق', noShift: 'الوردية غير مفتوحة',
+    cancel: 'إلغاء', reason: 'السبب', printed: 'الفاتورة جاهزة', mins: 'دقيقة', table: 'داخل المطعم', pickup: 'استلام', delivery: 'توصيل', nowPreparing: 'قيد التحضير', nowReady: 'جاهز — تفضل بالاستلام!', minus: 'تقليل', plus: 'زيادة', remove: 'حذف', ok: 'حسناً' },
 };
-function useT() { const { lang } = useLang(); return (k) => T[lang][k] ?? T.en[k] ?? k; }
+function useT() { const { lang } = useLang(); return (k) => T[lang]?.[k] ?? T.en[k] ?? k; }
 
 const me = { get: () => { try { return JSON.parse(localStorage.getItem('karto-staff') || 'null'); } catch { return null; } } };
 
@@ -147,7 +152,7 @@ function POS() {
               {list.filter((x) => x.available !== false).map((x) => (
                 <div key={x.id} className="pos-addon">
                   <span>{L(x.name)} <small>{fmt(x.price, lang)}</small></span>
-                  <div className="stepper"><button onClick={() => bump(k, x.id, -1)} aria-label="minus">−</button><span>{cur[k][x.id] || 0}</span><button className="plus" onClick={() => bump(k, x.id, 1)} aria-label="plus">+</button></div>
+                  <div className="stepper"><button onClick={() => bump(k, x.id, -1)} aria-label={tt('minus')}>−</button><span>{cur[k][x.id] || 0}</span><button className="plus" onClick={() => bump(k, x.id, 1)} aria-label={tt('plus')}>+</button></div>
                 </div>
               ))}
             </div>
@@ -168,7 +173,7 @@ function POS() {
             <div key={l.key} className="pos-line" style={{ borderLeftColor: SIZE_BG[l.size] }}>
               <div><b>{L(menu.sizes.find((s) => s.id === l.size)?.name)} · {L(menu.packaging.find((p) => p.id === l.packaging)?.name)}</b>
                 <small>{describe(l, menu, L).join(' · ')}</small></div>
-              <div className="pos-line__r"><b>{fmt(linePrice(l, menu), lang)}</b><button aria-label="remove" onClick={() => setLines(lines.filter((x) => x.key !== l.key))}>✕</button></div>
+              <div className="pos-line__r"><b>{fmt(linePrice(l, menu), lang)}</b><button aria-label={tt('remove')} onClick={() => setLines(lines.filter((x) => x.key !== l.key))}>✕</button></div>
             </div>
           ))}
         </div>
@@ -222,26 +227,26 @@ function ShiftClose({ shift, onDone }) {
           <label className="field"><span>{tt('counted')}</span><input inputMode="numeric" value={v} onChange={(e) => setV(e.target.value.replace(/\D/g, ''))} /></label>
           {res ? <p><b>{tt('expected')}:</b> {fmt(res.expected, lang)} · <b>{tt('diff')}:</b> <span style={{ color: res.diff ? 'var(--red)' : 'var(--green)' }}>{fmt(res.diff, lang)}</span></p> : null}
           {!res ? <button className="btn btn--sm btn--red" onClick={() => api('/staff/shift/close', { method: 'POST', body: { countedCash: +v || 0 } }).then(setRes)}>{tt('closeShift')}</button>
-            : <button className="btn btn--sm btn--yellow" onClick={onDone}>OK</button>}
+            : <button className="btn btn--sm btn--yellow" onClick={onDone}>{tt('ok')}</button>}
         </div>)}
     </div>
   );
 }
 
 function ReceiptModal({ o, onClose }) {
-  const tt = useT(); const { L, lang } = useLang(); const menu = useMenu();
+  const tt = useT(); const { L, lang, t } = useLang(); const menu = useMenu();
   return (
     <motion.div className="modal" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={onClose}>
       <motion.div className="receipt print-area" initial={{ y: 40 }} animate={{ y: 0 }} onClick={(e) => e.stopPropagation()} style={{ width: 340 }}>
-        <div className="center"><Logo size={26} /><div>Beyond Ordinary Potatoes.</div></div>
+        <div className="center"><Logo size={26} /><div>{t('heroSlogan')}</div></div>
         <div className="center" style={{ fontSize: 44, fontWeight: 900, fontFamily: 'var(--display)' }}>#{o.number}</div>
         <div>{o.invoiceNo} · {new Date(o.createdAt).toLocaleString()}</div><hr />
         {o.items.map((i, n) => <div key={n}><div className="line" style={{ padding: 0 }}><span>{i.qty}× {L(menu.sizes.find((s) => s.id === i.size)?.name)} {i.grams}g</span><span>{fmt(i.total, lang)}</span></div><small>{describe(i, menu, L).join(' · ')}</small></div>)}
         <hr />{o.discount > 0 && <div className="line" style={{ padding: 0 }}><span>{tt('discount')}</span><span>−{fmt(o.discount, lang)}</span></div>}
         <div className="line" style={{ padding: 0, fontWeight: 900 }}><span>Σ</span><span>{fmt(o.total, lang)}</span></div>
         {o.cashReceived != null && <><div className="line" style={{ padding: 0 }}><span>{tt('received')}</span><span>{fmt(o.cashReceived, lang)}</span></div><div className="line" style={{ padding: 0 }}><span>{tt('change')}</span><span>{fmt(o.change, lang)}</span></div></>}
-        <div className="center" style={{ marginTop: 8 }}>Thanks for choosing KARTO!</div>
-        <div className="no-print" style={{ display: 'flex', gap: 8, marginTop: 12 }}><button className="btn btn--sm btn--yellow" data-print="1" onClick={() => window.print()}>Print</button><button className="btn btn--sm btn--ghost" onClick={onClose}>OK</button></div>
+        <div className="center" style={{ marginTop: 8 }}>{t('thanks')}</div>
+        <div className="no-print" style={{ display: 'flex', gap: 8, marginTop: 12 }}><button className="btn btn--sm btn--yellow" data-print="1" onClick={() => window.print()}>{t('print')}</button><button className="btn btn--sm btn--ghost" onClick={onClose}>{tt('ok')}</button></div>
       </motion.div>
     </motion.div>
   );
@@ -293,7 +298,7 @@ function KDS() {
 
 // ---------------- TV board (public) ----------------
 export function TV() {
-  const tt = useT(); const { L, lang } = useLang(); const menu = useMenu(); const [b, setB] = useState({ preparing: [], ready: [] }); const [slide, setSlide] = useState(0);
+  const tt = useT(); const { L, lang, t } = useLang(); const menu = useMenu(); const [b, setB] = useState({ preparing: [], ready: [] }); const [slide, setSlide] = useState(0);
   const load = () => fetch('/api/board').then((r) => r.json()).then(setB).catch(() => {});
   useEffect(() => { load(); const i = setInterval(load, 15000); const j = setInterval(() => setSlide((s) => s + 1), 7000); return () => { clearInterval(i); clearInterval(j); }; }, []);
   useLive((ev) => ev.type === 'order' && load());
@@ -301,7 +306,7 @@ export function TV() {
   return (
     <div className="tv">
       <section className="tv__menu">
-        <div className="tv__head"><Logo size={56} /><span>Beyond Ordinary Potatoes.</span></div>
+      <div className="tv__head"><Logo size={56} /><span>{t('heroSlogan')}</span></div>
         <div className="tv__sizes">
           {menu.sizes.map((s) => <div key={s.id} className="tv-size" style={{ background: '#FFFFFF', color: 'var(--ink)' }}><b>{L(s.name)}</b><span>{s.grams} g</span><strong>{fmt(s.price, lang)}</strong></div>)}
         </div>

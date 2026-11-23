@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Logo, Mascot, Checker } from '../brand.jsx';
+import { LangSwitch } from '../i18n.jsx';
 import { resetDemo } from './mockServer.js';
 import { useState } from 'react';
 
@@ -20,7 +21,7 @@ export default function DemoHub() {
         <div className="wrap" style={{ padding: '28px 0 34px', display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 22 }}>
           <Mascot size={96} />
           <div style={{ flex: '1 1 320px', minWidth: 0 }}>
-            <Logo size={40} mascot={false} />
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 12 }}><Logo size={40} mascot={false} /><LangSwitch /></div>
             <h1 style={{ fontSize: 'clamp(28px,4vw,44px)', fontWeight: 900, marginTop: 10 }}>النسخة التجريبية — النظام كامل</h1>
             <p style={{ margin: '8px 0 0', fontWeight: 700, color: 'var(--ink-2)' }}>كل البرامج متصلة ببعض: أي طلب بتعمله بالتطبيق بيوصل للكاشير والمطبخ والتلفزيون ولوحة المالك. هذه نسخة استعراض ببيانات تجريبية محفوظة في هذا المتصفح.</p>
           </div>
@@ -51,7 +52,7 @@ export default function DemoHub() {
             <li>افتح <b>شاشة التلفزيون</b> ← بتشوف رقم الطلب الجاهز.</li>
             <li>اطلع وادخل بالـ PIN ‏1111 ← <b>لوحة المالك</b>: المبيعات، الربح، المخزون نقص لحاله، وابحث عن الفاتورة.</li>
           </ol>
-          <p className="muted" style={{ marginTop: 10 }}>اللغة بتتغير من أزرار UZ / RU / EN فوق كل شاشة.</p>
+          <p className="muted" style={{ marginTop: 10 }}>اللغة متوفرة من أزرار UZ / RU / EN / AR أعلى الشاشة.</p>
           <button className="btn btn--ghost btn--sm" style={{ marginTop: 10 }} onClick={() => { resetDemo(); setDone(true); }}>{done ? 'تم ✓ — البيانات رجعت للبداية' : 'امسح البيانات التجريبية وابدأ من جديد'}</button>
         </section>
       </main>

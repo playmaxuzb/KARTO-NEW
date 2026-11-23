@@ -44,7 +44,7 @@ function Home() {
       <div className="promo">
         <img src="/img/karto-medium.png" alt="" />
         <div className="promo__txt">
-          <span className="kicker" style={{ color: 'var(--yellow)', fontSize: 12 }}><Sparkle size={14} /> Made Your Way</span>
+          <span className="kicker" style={{ color: 'var(--yellow)', fontSize: 12 }}><Sparkle size={14} /> {t('heroSlogan')}</span>
           <h2 style={{ marginTop: 8 }}>{t('build')}<em>KARTO!</em></h2>
           <button className="btn btn--yellow btn--sm" style={{ marginTop: 16 }} onClick={() => nav('/app/build')}>{t('order')} →</button>
         </div>
@@ -207,7 +207,7 @@ function Cart() {
               </div>
               <div className="muted" style={{ fontSize: 13 }}>{describe(i, menu, L)}</div>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 8 }}>
-                <Stepper label="qty" value={i.qty || 1} onChange={(v) => (v < 1 ? cartStore.remove(i.key) : cartStore.setQty(i.key, v))} />
+                <Stepper label={t('quantity')} value={i.qty || 1} onChange={(v) => (v < 1 ? cartStore.remove(i.key) : cartStore.setQty(i.key, v))} />
                 <b>{fmt(linePrice(i, menu), lang)}</b>
               </div>
             </div>
@@ -297,7 +297,7 @@ function OrderView() {
       </div>
       <div className="sec-title"><h3>{t('receipt')}</h3></div>
       <div className="receipt">
-        <div className="center" style={{ marginBottom: 8 }}><Logo size={26} /><div>Beyond Ordinary Potatoes.</div></div>
+        <div className="center" style={{ marginBottom: 8 }}><Logo size={26} /><div>{t('heroSlogan')}</div></div>
         <div>{t('invoiceNo')}: <b>{o.invoiceNo}</b></div>
         <div>{t('orderNo')}: {o.ref}</div>
         <div>{new Date(o.createdAt).toLocaleString(lang === 'en' ? 'en-GB' : lang)}</div>
@@ -316,7 +316,7 @@ function OrderView() {
         <div className="center" style={{ marginTop: 10 }}>{t('thanks')}</div>
       </div>
       <div style={{ display: 'flex', gap: 10, marginTop: 14 }}>
-        <button className="btn btn--ghost btn--sm" data-print="1" onClick={() => window.print()}>PDF / Print</button>
+        <button className="btn btn--ghost btn--sm" data-print="1" onClick={() => window.print()}>PDF / {t('print')}</button>
         <Link className="btn btn--yellow btn--sm" to="/app/build">{t('newOrder')}</Link>
       </div>
     </div>
@@ -334,7 +334,7 @@ function Me() {
       <div className="sec-title"><h3>{t('orders')}</h3></div>
       {refs.length === 0 && <p className="muted">—</p>}
       {refs.map((r) => <Link key={r} to={'/app/order/' + r} className="card" style={{ display: 'flex', justifyContent: 'space-between', textDecoration: 'none', marginBottom: 8 }}><b>{r}</b><span>→</span></Link>)}
-      <div className="sec-title"><h3>Til / Язык / Language</h3></div>
+      <div className="sec-title"><h3>{t('language')}</h3></div>
       <LangSwitch dark />
     </div>
   );
@@ -342,7 +342,7 @@ function Me() {
 
 function Maintenance({ m }) {
   const { L } = useLang();
-  const msg = L(m.message) || L({ uz: 'Biz tez orada qaytamiz! Xizmatni yaxshilash ustida ishlayapmiz.', ru: 'Мы скоро вернёмся! Мы улучшаем сервис для вас.', en: 'We’ll be right back! We’re improving things for you.' });
+  const msg = L(m.message) || L({ uz: 'Biz tez orada qaytamiz! Xizmatni yaxshilash ustida ishlayapmiz.', ru: 'Мы скоро вернёмся! Мы улучшаем сервис для вас.', en: 'We’ll be right back! We’re improving things for you.', ar: 'سنعود قريباً، نعمل على تحسين الخدمة.' });
   return (
     <div className="center" style={{ paddingTop: 50 }}>
       <motion.div animate={{ rotate: [0, -6, 6, 0] }} transition={{ duration: 2.4, repeat: Infinity }}><Mascot size={150} /></motion.div>

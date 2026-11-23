@@ -31,8 +31,15 @@ const TX = {
     search: 'Search invoice, order, customer or phone', save: 'Save', saved: 'Saved ✓', price: 'Price', available: 'Available', add: 'Add', qty: 'Quantity', reason: 'Reason', unitCost: 'Unit cost',
     category: 'Category', amount: 'Amount', date: 'Date', note: 'Note', name: 'Name', role: 'Role', salary: 'Monthly salary', pin: 'New PIN', active: 'Active', maintenance: 'Maintenance mode',
     maintMsg: 'Message to customers', ordering: 'Online ordering', delivery: 'Delivery', branch: 'Branch details', refund: 'Refund', cancelO: 'Cancel', history: 'History', back: 'Back' },
+  ar: { dash: 'لوحة التحكم', orders: 'الطلبات والفواتير', menu: 'القائمة والأسعار', stock: 'المخزون', exp: 'المصاريف', staff: 'الموظفون', settings: 'الإعدادات', audit: 'سجل التدقيق',
+    netSales: 'صافي المبيعات', grossProfit: 'إجمالي الربح', netProfit: 'صافي الربح', ordersN: 'الطلبات', aov: 'متوسط الفاتورة', cogs: 'تكلفة المنتجات', opex: 'المصاريف التشغيلية', payroll: 'الرواتب المستحقة',
+    period: 'الفترة', today: 'اليوم', week: '7 أيام', month: '30 يوماً', bySize: 'حسب الحجم', bySeason: 'النكهات', byPay: 'طرق الدفع', byChannel: 'القنوات', byDay: 'المبيعات اليومية', lowStock: 'مخزون منخفض',
+    search: 'ابحث برقم الفاتورة أو الطلب أو العميل أو الهاتف', save: 'حفظ', saved: 'تم الحفظ ✓', price: 'السعر', available: 'متوفر', add: 'إضافة', qty: 'الكمية', reason: 'السبب', unitCost: 'تكلفة الوحدة',
+    category: 'الفئة', amount: 'المبلغ', date: 'التاريخ', note: 'ملاحظة', name: 'الاسم', role: 'الدور', salary: 'الراتب الشهري', pin: 'رقم سري جديد', active: 'نشط', maintenance: 'وضع الصيانة',
+    maintMsg: 'رسالة للعملاء', ordering: 'الطلب عبر الإنترنت', delivery: 'التوصيل', branch: 'بيانات الفرع', refund: 'استرداد', cancelO: 'إلغاء', history: 'السجل', back: 'رجوع',
+    invoice: 'الفاتورة', customer: 'العميل', channel: 'القناة', status: 'الحالة', payment: 'الدفع', total: 'الإجمالي', discount: 'الخصم', item: 'الصنف', onHand: 'المتوفر', unit: 'الوحدة', reorderAt: 'حد إعادة الطلب', value: 'القيمة', time: 'الوقت', action: 'الإجراء', entity: 'العنصر', details: 'التفاصيل', extraSeasoning: 'سعر النكهة الإضافية', maxSeasonings: 'أقصى عدد للنكهات', deliveryFee: 'رسوم التوصيل', salaryNote: 'تُحتسب الرواتب تلقائياً من الراتب الشهري لكل موظف.', returnTime: 'موعد العودة (بعد التأكيد)', pos: 'الكاشير', kitchen: 'المطبخ', tv: 'شاشة العرض', website: 'الموقع', logout: 'تسجيل الخروج', purchase: 'شراء / توريد', waste: 'هدر / تلف', count: 'تعديل الجرد (±)', return: 'إرجاع' },
 };
-function useT() { const { lang } = useLang(); return (k) => TX[lang][k] ?? TX.en[k] ?? k; }
+function useT() { const { lang } = useLang(); return (k) => TX[lang]?.[k] ?? TX.en[k] ?? k; }
 
 function Bars({ data, colors = {}, labels = {}, money }) {
   const entries = Object.entries(data || {}); const max = Math.max(1, ...entries.map(([, v]) => v));
@@ -99,7 +106,7 @@ function Orders() {
       <input className="ad-search" placeholder={t('search')} value={q} onChange={(e) => setQ(e.target.value)} />
       <div className="ad-split">
         <div className="panel" style={{ padding: 0, overflow: 'auto' }}>
-          <table className="tbl"><thead><tr><th>Invoice</th><th>#</th><th>Customer</th><th>Channel</th><th>Status</th><th>Payment</th><th style={{ textAlign: 'right' }}>Total</th><th>Date</th></tr></thead>
+          <table className="tbl"><thead><tr><th>{t('invoice')}</th><th>#</th><th>{t('customer')}</th><th>{t('channel')}</th><th>{t('status')}</th><th>{t('payment')}</th><th style={{ textAlign: 'right' }}>{t('total')}</th><th>{t('date')}</th></tr></thead>
             <tbody>{list.map((o) => (
               <tr key={o.id} onClick={() => open(o)} className={sel?.id === o.id ? 'sel' : ''}>
                 <td><b>{o.invoiceNo}</b></td><td>{o.number}</td><td>{o.customer?.name || '—'}<br /><small>{o.customer?.phone}</small></td><td>{o.channel}</td>
@@ -112,8 +119,8 @@ function Orders() {
             <p className="muted">{sel.ref} · {sel.mode} · {new Date(sel.createdAt).toLocaleString()}</p>
             <p><b>{sel.customer?.name}</b> {sel.customer?.phone} {sel.customer?.address}</p>
             {sel.items.map((i, n) => <div key={n} className="row"><span>{i.qty}× {i.size.toUpperCase()} {i.grams}g · {i.packaging} · {i.seasonings.join(', ')}</span><b>{N(i.total)}</b></div>)}
-            <div className="row"><span>Discount</span><b>−{N(sel.discount)}</b></div><div className="row"><span>Delivery</span><b>{N(sel.deliveryFee)}</b></div>
-            <div className="row" style={{ fontSize: 20 }}><span>Total</span><b>{N(sel.total)}</b></div>
+            <div className="row"><span>{t('discount')}</span><b>−{N(sel.discount)}</b></div><div className="row"><span>{t('delivery')}</span><b>{N(sel.deliveryFee)}</b></div>
+            <div className="row" style={{ fontSize: 20 }}><span>{t('total')}</span><b>{N(sel.total)}</b></div>
             {sel.voidReason && <p style={{ color: 'var(--red)' }}><b>{t('reason')}:</b> {sel.voidReason}</p>}
             <h3 style={{ marginTop: 14 }}>{t('history')}</h3>
             {hist.map((h) => <div key={h.id} className="row"><span>{h.status} {h.note ? '· ' + h.note : ''}</span><small>{h.staff || 'customer'} · {new Date(h.at).toLocaleTimeString()}</small></div>)}
@@ -137,11 +144,11 @@ function MenuEditor() {
   const Group = ({ k, title, price = true }) => (
     <div className="panel" key={k}>
       <h3>{title}</h3>
-      <table className="tbl"><thead><tr><th>ID</th><th>UZ</th><th>RU</th><th>EN</th>{price && <th>{t('price')}</th>}<th>{t('available')}</th></tr></thead>
+      <table className="tbl"><thead><tr><th>ID</th><th>UZ</th><th>RU</th><th>EN</th><th>AR</th>{price && <th>{t('price')}</th>}<th>{t('available')}</th></tr></thead>
         <tbody>{m[k].map((x, i) => (
           <tr key={x.id + i}>
             <td><b>{x.id}</b>{k === 'sizes' && <><br /><input className="in-s" type="number" value={x.grams} onChange={(e) => upd(k, i, { grams: +e.target.value })} /> g</>}</td>
-            {['uz', 'ru', 'en'].map((l) => <td key={l}><input className="in" value={x.name[l]} onChange={(e) => upd(k, i, { name: { ...x.name, [l]: e.target.value } })} /></td>)}
+            {['uz', 'ru', 'en', 'ar'].map((l) => <td key={l}><input className="in" dir={l === 'ar' ? 'rtl' : 'auto'} value={x.name[l] || ''} onChange={(e) => upd(k, i, { name: { ...x.name, [l]: e.target.value } })} /></td>)}
             {price && <td><input className="in-s" type="number" value={x.price} onChange={(e) => upd(k, i, { price: +e.target.value })} /></td>}
             <td><input type="checkbox" checked={x.available !== false} onChange={(e) => upd(k, i, { available: e.target.checked })} aria-label={t('available')} /></td>
           </tr>))}</tbody></table>
@@ -152,9 +159,9 @@ function MenuEditor() {
     <div>
       <div className="ad-head"><h1>{t('menu')}</h1><div style={{ display: 'flex', gap: 10, alignItems: 'center' }}><b style={{ color: 'var(--green)' }}>{ok}</b><button className="btn btn--yellow" onClick={save}>{t('save')}</button></div></div>
       <div className="panel" style={{ display: 'flex', gap: 24, flexWrap: 'wrap', marginBottom: 16 }}>
-        <label className="field"><span>Extra seasoning price</span><input type="number" value={m.extraSeasoningPrice} onChange={(e) => setM({ ...m, extraSeasoningPrice: +e.target.value })} /></label>
-        <label className="field"><span>Max seasonings</span><input type="number" min="1" max="5" value={m.maxSeasonings} onChange={(e) => setM({ ...m, maxSeasonings: +e.target.value })} /></label>
-        <label className="field"><span>Delivery fee</span><input type="number" value={m.deliveryFee ?? 0} onChange={(e) => setM({ ...m, deliveryFee: +e.target.value })} /></label>
+        <label className="field"><span>{t('extraSeasoning')}</span><input type="number" value={m.extraSeasoningPrice} onChange={(e) => setM({ ...m, extraSeasoningPrice: +e.target.value })} /></label>
+        <label className="field"><span>{t('maxSeasonings')}</span><input type="number" min="1" max="5" value={m.maxSeasonings} onChange={(e) => setM({ ...m, maxSeasonings: +e.target.value })} /></label>
+        <label className="field"><span>{t('deliveryFee')}</span><input type="number" value={m.deliveryFee ?? 0} onChange={(e) => setM({ ...m, deliveryFee: +e.target.value })} /></label>
       </div>
       <div className="ad-stack">
         {Group({ k: 'sizes', title: 'Sizes' })}{Group({ k: 'packaging', title: 'Packaging', price: false })}{Group({ k: 'seasonings', title: 'Seasonings', price: false })}
@@ -172,15 +179,15 @@ function Stock() {
     <div>
       <div className="ad-head"><h1>{t('stock')}</h1></div>
       <form className="panel ad-form" onSubmit={submit}>
-        <label className="field"><span>Item</span><select value={f.itemId} onChange={(e) => setF({ ...f, itemId: e.target.value })} required><option value="">—</option>{list.map((i) => <option key={i.id} value={i.id}>{i.name}</option>)}</select></label>
-        <label className="field"><span>{t('reason')}</span><select value={f.reason} onChange={(e) => setF({ ...f, reason: e.target.value })}><option value="purchase">Purchase / delivery</option><option value="waste">Waste / spoilage</option><option value="count">Stock count adjustment (±)</option><option value="return">Return</option></select></label>
+        <label className="field"><span>{t('item')}</span><select value={f.itemId} onChange={(e) => setF({ ...f, itemId: e.target.value })} required><option value="">—</option>{list.map((i) => <option key={i.id} value={i.id}>{i.name}</option>)}</select></label>
+        <label className="field"><span>{t('reason')}</span><select value={f.reason} onChange={(e) => setF({ ...f, reason: e.target.value })}><option value="purchase">{t('purchase')}</option><option value="waste">{t('waste')}</option><option value="count">{t('count')}</option><option value="return">{t('return')}</option></select></label>
         <label className="field"><span>{t('qty')}</span><input type="number" step="any" value={f.delta} onChange={(e) => setF({ ...f, delta: e.target.value })} required /></label>
         {f.reason === 'purchase' && <label className="field"><span>{t('unitCost')}</span><input type="number" value={f.unitCost} onChange={(e) => setF({ ...f, unitCost: e.target.value })} /></label>}
         <label className="field"><span>{t('note')}</span><input value={f.note} onChange={(e) => setF({ ...f, note: e.target.value })} /></label>
         <button className="btn btn--green">{t('save')}</button>
       </form>
       <div className="panel" style={{ padding: 0 }}>
-        <table className="tbl"><thead><tr><th>Item</th><th style={{ textAlign: 'right' }}>On hand</th><th>Unit</th><th style={{ textAlign: 'right' }}>Reorder at</th><th style={{ textAlign: 'right' }}>{t('unitCost')}</th><th style={{ textAlign: 'right' }}>Value</th></tr></thead>
+        <table className="tbl"><thead><tr><th>{t('item')}</th><th style={{ textAlign: 'right' }}>{t('onHand')}</th><th>{t('unit')}</th><th style={{ textAlign: 'right' }}>{t('reorderAt')}</th><th style={{ textAlign: 'right' }}>{t('unitCost')}</th><th style={{ textAlign: 'right' }}>{t('value')}</th></tr></thead>
           <tbody>{list.map((i) => <tr key={i.id} className={i.qty <= i.reorder ? 'low' : ''}><td>{i.name}</td><td style={{ textAlign: 'right' }}><b>{+i.qty.toFixed(2)}</b></td><td>{i.unit}</td><td style={{ textAlign: 'right' }}>{i.reorder}</td><td style={{ textAlign: 'right' }}>{N(i.unit_cost)}</td><td style={{ textAlign: 'right' }}>{N(i.qty * i.unit_cost)}</td></tr>)}</tbody></table>
       </div>
     </div>
@@ -203,7 +210,7 @@ function Expenses() {
       </form>
       <div className="panel" style={{ padding: 0 }}><table className="tbl"><thead><tr><th>{t('date')}</th><th>{t('category')}</th><th>{t('note')}</th><th style={{ textAlign: 'right' }}>{t('amount')}</th></tr></thead>
         <tbody>{list.map((x) => <tr key={x.id}><td>{x.date}</td><td>{x.category}</td><td>{x.note}</td><td style={{ textAlign: 'right' }}><b>{N(x.amount)}</b></td></tr>)}</tbody></table></div>
-      <p className="muted" style={{ fontSize: 13 }}>Salaries are not entered here: they are accrued automatically from each employee’s monthly salary in Staff.</p>
+      <p className="muted" style={{ fontSize: 13 }}>{t('salaryNote')}</p>
     </div>
   );
 }
@@ -247,7 +254,7 @@ function Settings() {
           <label className="toggle"><input type="checkbox" checked={m.ordering !== false} onChange={(e) => setM({ ordering: e.target.checked })} /> {t('ordering')}</label>
           <label className="toggle"><input type="checkbox" checked={m.delivery !== false} onChange={(e) => setM({ delivery: e.target.checked })} /> {t('delivery')}</label>
           {['uz', 'ru', 'en'].map((l) => <label className="field" key={l}><span>{t('maintMsg')} ({l.toUpperCase()})</span><textarea rows="2" value={m.message?.[l] || ''} onChange={(e) => setM({ message: { ...m.message, [l]: e.target.value } })} /></label>)}
-          <label className="field"><span>Return time (only if confirmed)</span><input value={m.returnAt || ''} onChange={(e) => setM({ returnAt: e.target.value })} placeholder="18:00" /></label>
+          <label className="field"><span>{t('returnTime')}</span><input value={m.returnAt || ''} onChange={(e) => setM({ returnAt: e.target.value })} placeholder="18:00" /></label>
         </div>
         <div className="panel">
           <h3>{t('branch')}</h3>
@@ -262,7 +269,7 @@ function Settings() {
 function Audit() {
   const t = useT(); const [list, setList] = useState([]); useEffect(() => { api('/admin/audit').then(setList).catch(() => {}); }, []);
   return (<div><div className="ad-head"><h1>{t('audit')}</h1></div>
-    <div className="panel" style={{ padding: 0 }}><table className="tbl"><thead><tr><th>Time</th><th>Staff</th><th>Action</th><th>Entity</th><th>Details</th></tr></thead>
+    <div className="panel" style={{ padding: 0 }}><table className="tbl"><thead><tr><th>{t('time')}</th><th>{t('staff')}</th><th>{t('action')}</th><th>{t('entity')}</th><th>{t('details')}</th></tr></thead>
       <tbody>{list.map((a) => <tr key={a.id}><td><small>{new Date(a.at).toLocaleString()}</small></td><td>{a.staff || '—'}</td><td>{a.action}</td><td>{a.entity} {a.entity_id}</td><td><small style={{ wordBreak: 'break-all' }}>{(a.after || '').slice(0, 120)}</small></td></tr>)}</tbody></table></div></div>);
 }
 
@@ -278,8 +285,8 @@ function AdminShell() {
         <div style={{ padding: '6px 8px 18px' }}><Logo size={30} /></div>
         <nav>{links.map(([p, k]) => <NavLink key={k} to={'/admin' + (p ? '/' + p : '')} end>{t(k)}</NavLink>)}</nav>
         <div className="ad-side__b">
-          <a className="ad-ext" href="/staff/pos">POS →</a><a className="ad-ext" href="/staff/kds">Kitchen →</a><a className="ad-ext" href="/staff/tv" target="_blank" rel="noopener">TV →</a><a className="ad-ext" href="/" target="_blank" rel="noopener">Website →</a>
-          <LangSwitch /><div style={{ fontWeight: 800, fontSize: 14 }}>{u.name} · {u.role}</div><button className="btn btn--sm btn--ghost" onClick={out}>Log out</button>
+          <a className="ad-ext" href="/staff/pos">{t('pos')} →</a><a className="ad-ext" href="/staff/kds">{t('kitchen')} →</a><a className="ad-ext" href="/staff/tv" target="_blank" rel="noopener">{t('tv')} →</a><a className="ad-ext" href="/" target="_blank" rel="noopener">{t('website')} →</a>
+          <LangSwitch /><div style={{ fontWeight: 800, fontSize: 14 }}>{u.name} · {u.role}</div><button className="btn btn--sm btn--ghost" onClick={out}>{t('logout')}</button>
           <Mascot size={70} />
         </div>
       </aside>

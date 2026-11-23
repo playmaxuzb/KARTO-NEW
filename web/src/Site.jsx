@@ -195,7 +195,7 @@ export default function Site() {
 
       <footer className="footer">
         <div className="wrap footer__in">
-          <Logo size={30} /><span>Beyond Ordinary Potatoes.</span><span>© {new Date().getFullYear()} KARTO. {t('footer')}</span>
+          <Logo size={30} /><span>{t('heroSlogan')}</span><span>© {new Date().getFullYear()} KARTO. {t('footer')}</span>
         </div>
       </footer>
     </div>

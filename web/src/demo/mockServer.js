@@ -33,7 +33,7 @@ function load() {
       db.menu = { ...defaults, ...(db.menu || {}) };
       db.menu.sizes = (db.menu.sizes || defaults.sizes).map((item) => {
         const fresh = defaults.sizes.find((x) => x.id === item.id);
-        return fresh ? { ...fresh, ...item, img: fresh.img, package: fresh.package } : item;
+        return fresh ? { ...fresh, ...item, name: { ...fresh.name, ...item.name, ar: fresh.name.ar }, img: fresh.img, package: fresh.package } : item;
       });
       db.menu.packaging = (db.menu.packaging || defaults.packaging).map((item) => {
         const fresh = defaults.packaging.find((x) => x.id === item.id);

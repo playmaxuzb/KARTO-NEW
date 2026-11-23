@@ -7,11 +7,11 @@ const D = {
     heroLead: 'O‘lchamni tanlang, 3 tagacha ziravor qo‘shing, sousingizni tanlang. KARTO — siz xohlagandek.',
     seeMenu: 'Menyuni ko‘rish', statSizes: 'o‘lcham', statSeason: 'ziravor', statServe: 'xil qadoq',
     howKicker: 'Made Your Way', howTitle: 'KARTO’ingizni 4 qadamda yig‘ing',
-    step1: 'O‘lcham', step1t: 'Kichik, o‘rta yoki katta — har biri o‘z rangida.',
-    step2: 'Qadoq', step2t: 'Kosa, patnis yoki konus.',
+    step1: 'O‘lcham', step1t: 'Kichik, o‘rta yoki katta — har birining o‘z qadoqlashi bor.',
+    step2: 'Qadoq', step2t: 'Sousli kichik quti, dumaloq kosa yoki sirpanma qopqoqli katta quti.',
     step3: 'Ziravorlar', step3t: '3 tagacha ta’mni aralashtiring.',
     step4: 'Sous va ichimlik', step4t: 'Sevimli sousingiz va salqin ichimlik.',
-    sizesTitle: 'Uchta o‘lcham. Uchta rang.', sizesLead: 'Sariq — kichik, apelsin — o‘rta, qizil — katta. Kassada ham, ilovada ham bir xil.',
+    sizesTitle: 'Uch hajm. Uch xil qadoq.', sizesLead: 'Kichik — sousli ixcham quti, o‘rta — dumaloq kosa, katta — sirpanma qopqoqli keng quti.',
     serveTitle: 'KARTO qadoqlash kolleksiyasi', packagingLead: 'Oq va oltin rangdagi kartoshka qutilari, balandroq stakanlar, suv idishlari va sharbatlar uchun uch xil qadoq.', seasonTitle: 'Yetti ziravor', seasonLead: 'Birinchisi bepul, keyingilari +2 000.',
     saucesTitle: 'Souslar', drinksTitle: 'Ichimliklar',
     storyKicker: 'Bizning hikoya', storyTitle: 'Oddiy kartoshka — ajoyib bo‘lishi mumkin.',
@@ -33,6 +33,8 @@ const D = {
     receipt: 'Elektron chek', home: 'Bosh sahifa', menu: 'Menyu', orders: 'Buyurtmalar', profile: 'Profil', rewards: 'KARTO Rewards', points: 'ball',
     edit: 'O‘zgartirish', remove: 'O‘chirish', back: 'Orqaga', next: 'Keyingi', yourCup: 'Sizning KARTO', extra: 'qo‘shimcha ziravor',
     readyIn: 'Taxminiy tayyor bo‘lish vaqti', min: 'daq', orderNo: 'Buyurtma', invoiceNo: 'Chek raqami', newOrder: 'Yangi buyurtma',
+    language: 'Til', print: 'Chop etish',
+    quantity: 'miqdor',
   },
   ru: {
     navMenu: 'Меню', navHow: 'Как это работает', navStory: 'О нас', navContact: 'Контакты', order: 'Заказать',
@@ -40,11 +42,11 @@ const D = {
     heroLead: 'Выберите размер, добавьте до 3 специй и любимый соус. KARTO — так, как любите вы.',
     seeMenu: 'Смотреть меню', statSizes: 'размера', statSeason: 'специй', statServe: 'вида подачи',
     howKicker: 'Made Your Way', howTitle: 'Соберите свой KARTO за 4 шага',
-    step1: 'Размер', step1t: 'Маленький, средний или большой — у каждого свой цвет.',
-    step2: 'Подача', step2t: 'Чаша, лоток или рожок.',
+    step1: 'Размер', step1t: 'Маленький, средний или большой — у каждого своя упаковка.',
+    step2: 'Упаковка', step2t: 'Маленькая коробка с соусом, круглая чаша или большая коробка-слайдер.',
     step3: 'Специи', step3t: 'Смешайте до 3 вкусов.',
     step4: 'Соус и напиток', step4t: 'Любимый соус и холодный напиток.',
-    sizesTitle: 'Три размера. Три цвета.', sizesLead: 'Жёлтый — маленький, оранжевый — средний, красный — большой. Одинаково на кассе и в приложении.',
+    sizesTitle: 'Три размера. Три вида упаковки.', sizesLead: 'Маленький — коробка с соусом, средний — круглая чаша, большой — широкая коробка с выдвижной крышкой.',
     serveTitle: 'Коллекция упаковки KARTO', packagingLead: 'Белая упаковка с золотыми деталями: коробки для картофеля, стаканы, бутылки для воды и три формата упаковки для сока.', seasonTitle: 'Семь специй', seasonLead: 'Первая бесплатно, следующие +2 000.',
     saucesTitle: 'Соусы', drinksTitle: 'Напитки',
     storyKicker: 'Наша история', storyTitle: 'Простая картошка может быть особенной.',
@@ -65,6 +67,8 @@ const D = {
     receipt: 'Электронный чек', home: 'Главная', menu: 'Меню', orders: 'Заказы', profile: 'Профиль', rewards: 'KARTO Rewards', points: 'баллов',
     edit: 'Изменить', remove: 'Удалить', back: 'Назад', next: 'Далее', yourCup: 'Ваш KARTO', extra: 'доп. специя',
     readyIn: 'Примерное время готовности', min: 'мин', orderNo: 'Заказ', invoiceNo: 'Номер чека', newOrder: 'Новый заказ',
+    language: 'Язык', print: 'Печать',
+    quantity: 'количество',
   },
   en: {
     navMenu: 'Menu', navHow: 'How it works', navStory: 'Our story', navContact: 'Contact', order: 'Order now',
@@ -72,11 +76,11 @@ const D = {
     heroLead: 'Pick your size, add up to 3 seasonings and choose your sauce. KARTO, your way.',
     seeMenu: 'See the menu', statSizes: 'sizes', statSeason: 'seasonings', statServe: 'ways to serve',
     howKicker: 'Made Your Way', howTitle: 'Build your KARTO in 4 steps',
-    step1: 'Size', step1t: 'Small, medium or large — each with its own color.',
-    step2: 'Serve', step2t: 'Bowl, tray or cone.',
+    step1: 'Size', step1t: 'Small, medium or large — each has its own package.',
+    step2: 'Packaging', step2t: 'Compact pack, round bowl or wide sliding box.',
     step3: 'Seasonings', step3t: 'Mix up to 3 flavors.',
     step4: 'Sauce & drink', step4t: 'Your favorite dip and a cold drink.',
-    sizesTitle: 'Three sizes. Three colors.', sizesLead: 'Yellow is small, orange is medium, red is large. Same at the counter and in the app.',
+    sizesTitle: 'Three sizes. Three packages.', sizesLead: 'Small comes with an attached dip, medium in a round bowl, and large in a wide sliding box.',
     serveTitle: 'The KARTO packaging collection', packagingLead: 'White packaging with gold details: fries boxes, taller cups, branded water bottles and three juice formats.', seasonTitle: 'Seven seasonings', seasonLead: 'First one free, extras +2,000.',
     saucesTitle: 'Sauces', drinksTitle: 'Drinks',
     storyKicker: 'Our story', storyTitle: 'A simple potato can become extraordinary.',
@@ -97,14 +101,37 @@ const D = {
     receipt: 'E-receipt', home: 'Home', menu: 'Menu', orders: 'Orders', profile: 'Profile', rewards: 'KARTO Rewards', points: 'points',
     edit: 'Edit', remove: 'Remove', back: 'Back', next: 'Next', yourCup: 'Your KARTO', extra: 'extra seasoning',
     readyIn: 'Estimated ready time', min: 'min', orderNo: 'Order', invoiceNo: 'Invoice no.', newOrder: 'New order',
+    language: 'Language', print: 'Print',
+    quantity: 'quantity',
+  },
+  ar: {
+    navMenu: 'القائمة', navHow: 'كيف يعمل', navStory: 'قصتنا', navContact: 'تواصل معنا', order: 'اطلب الآن',
+    heroKicker: 'جديد في طشقند', heroTitle1: 'أكثر من', heroTitle2: 'مجرد بطاطا.', heroSlogan: 'بطاطا خارج المألوف.',
+    heroLead: 'اختر الحجم، وأضف حتى 3 نكهات، ثم اختر الصوص. كارتو على ذوقك.', seeMenu: 'شاهد القائمة', statSizes: 'أحجام', statSeason: 'نكهات', statServe: 'أنواع تغليف',
+    howKicker: 'على ذوقك', howTitle: 'حضّر KARTO بطريقتك في 4 خطوات', step1: 'الحجم', step1t: 'صغير أو وسط أو كبير، ولكل حجم عبوته الخاصة.',
+    step2: 'التغليف', step2t: 'علبة صغيرة مع صوص، ووعاء دائري، أو علبة كبيرة بغطاء منزلق.', step3: 'النكهات', step3t: 'امزج حتى 3 نكهات.', step4: 'الصوص والمشروب', step4t: 'اختر صوصك ومشروبك المفضل.',
+    sizesTitle: 'ثلاثة أحجام وثلاثة تصاميم', sizesLead: 'الصغير علبة مدمجة مع الصوص، والوسط وعاء دائري، والكبير علبة عريضة بغطاء منزلق.',
+    serveTitle: 'مجموعة تغليف KARTO', packagingLead: 'تغليف أبيض بلمسات ذهبية وملمس بارز مميز، مع شعار البطاطا بالنظارة السوداء.', seasonTitle: 'النكهات', seasonLead: 'النكهة الأولى مجاناً، وكل إضافة بعدها +2,000.',
+    saucesTitle: 'الصوصات', drinksTitle: 'المشروبات', storyKicker: 'قصتنا', storyTitle: 'بطاطا بسيطة بتجربة غير عادية.',
+    storyText: 'في KARTO نؤمن أن البطاطا البسيطة تستحق تجربة مميزة. نختار المكونات بعناية، ونحضّر كل طلب بجودة ثابتة ونكهة تحبها.',
+    promise1: 'مكونات مختارة', promise2: 'حصة مضبوطة', promise3: 'نظافة وعناية', promise4: 'خدمة ودودة',
+    appTitle: 'تطبيق KARTO', appLead: 'اطلب، تابع طلبك، واجمع النقاط. توصيل أو استلام.', install: 'ثبّت التطبيق', openApp: 'افتح التطبيق', alsoOn: 'متوفر أيضاً على Yandex Eats وUzum Tezkor',
+    contactTitle: 'تجدنا هنا', address: 'العنوان', phone: 'الهاتف', hours: 'ساعات العمل', social: 'حساباتنا', footer: 'جميع الحقوق محفوظة.', allergen: 'اسأل فريقنا عن معلومات مسببات الحساسية.',
+    hi: 'أهلاً!', whatToday: 'أي KARTO تختار اليوم؟', build: 'ركّب طلبك', popular: 'الطلبات المفضلة', chooseSize: 'اختر الحجم', choosePack: 'التغليف', chooseSeason: 'النكهات', upTo3: 'حتى 3 نكهات',
+    firstFree: 'الأولى مجاناً', addSauce: 'أضف صوصاً', addDrink: 'مشروب', addToCart: 'أضف إلى السلة', cart: 'السلة', emptyCart: 'سلتك فارغة', subtotal: 'المجموع الفرعي', delivery: 'توصيل', pickup: 'استلام', deliveryFee: 'رسوم التوصيل', total: 'الإجمالي', checkout: 'إتمام الطلب',
+    name: 'الاسم', phoneNum: 'رقم الهاتف', addr: 'العنوان', note: 'ملاحظة (اختياري)', payment: 'طريقة الدفع', cash: 'نقداً', card: 'بطاقة (Uzcard / Humo)', online: 'Click / Payme', placeOrder: 'تأكيد الطلب', thanks: 'شكراً لاختيارك KARTO!', preparing: 'يجري تجهيز طلبك بعناية.',
+    track: 'حالة الطلب', st_received: 'تم الاستلام', st_confirmed: 'تم التأكيد', st_preparing: 'قيد التحضير', st_ready: 'جاهز', st_out: 'في الطريق', st_completed: 'مكتمل', st_cancelled: 'ملغي', receipt: 'إيصال إلكتروني', home: 'الرئيسية', menu: 'القائمة', orders: 'الطلبات', profile: 'حسابي', rewards: 'مكافآت KARTO', points: 'نقطة',
+    edit: 'تعديل', remove: 'حذف', back: 'رجوع', next: 'التالي', yourCup: 'طلبك من KARTO', extra: 'نكهة إضافية', readyIn: 'الوقت المتوقع للتجهيز', min: 'دقيقة', orderNo: 'الطلب', invoiceNo: 'رقم الفاتورة', newOrder: 'طلب جديد',
+    language: 'اللغة', print: 'طباعة',
+    quantity: 'الكمية',
   },
 };
 
 const Ctx = createContext(null);
 export function LangProvider({ children }) {
-  const [lang, setLang] = useState(() => { try { return localStorage.getItem('karto-lang') || 'uz'; } catch { return 'uz'; } });
-  useEffect(() => { try { localStorage.setItem('karto-lang', lang); } catch {} document.documentElement.lang = lang; }, [lang]);
-  const t = (k) => D[lang][k] ?? D.en[k] ?? k;
+  const [lang, setLang] = useState(() => { try { const saved = localStorage.getItem('karto-lang'); return ['uz', 'ru', 'en', 'ar'].includes(saved) ? saved : 'uz'; } catch { return 'uz'; } });
+  useEffect(() => { try { localStorage.setItem('karto-lang', lang); } catch {} document.documentElement.lang = lang; document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr'; }, [lang]);
+  const t = (k) => D[lang]?.[k] ?? D.en[k] ?? k;
   const L = (obj) => (obj ? obj[lang] ?? obj.en : '');
   return <Ctx.Provider value={{ lang, setLang, t, L }}>{children}</Ctx.Provider>;
 }
@@ -114,7 +141,7 @@ export function LangSwitch({ dark = false }) {
   const { lang, setLang } = useLang();
   return (
     <div className={'langs' + (dark ? ' langs--dark' : '')} role="group" aria-label="Language">
-      {['uz', 'ru', 'en'].map((c) => (
+      {['uz', 'ru', 'en', 'ar'].map((c) => (
         <button key={c} type="button" aria-pressed={lang === c} onClick={() => setLang(c)}>{c.toUpperCase()}</button>
       ))}
     </div>

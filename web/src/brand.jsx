@@ -17,6 +17,14 @@ export function Mascot({ size = 120, wave = true, className = '' }) {
         <ellipse cx="124" cy="122" rx="13" ry="16" fill="#2A1B12" />
         <circle cx="82" cy="116" r="4.5" fill="#fff" stroke="none" />
         <circle cx="128" cy="116" r="4.5" fill="#fff" stroke="none" />
+        {/* signature black shades with a restrained gold rim */}
+        <g fill="#171717" stroke="#D4A62E" strokeWidth="4">
+          <path d="M51 109h47v17c0 14-10 23-23 23S53 140 51 126Z" />
+          <path d="M102 109h47v17c-2 14-11 23-24 23s-23-9-23-23Z" />
+          <path d="M98 116q4-6 8 0" fill="none" />
+          <path d="M50 112q-8-4-12 2M149 112q8-4 12 2" fill="none" />
+        </g>
+        <path d="M60 115l11 3M111 115l11 3" stroke="#A8A8A8" strokeWidth="2.5" strokeLinecap="round" />
         {/* cheeks */}
         <ellipse cx="56" cy="150" rx="11" ry="7" fill="#F0785A" stroke="none" opacity=".75" />
         <ellipse cx="146" cy="150" rx="11" ry="7" fill="#F0785A" stroke="none" opacity=".75" />
