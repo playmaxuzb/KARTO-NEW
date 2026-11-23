@@ -43,6 +43,13 @@ function load() {
         const fresh = defaults.combos.find((x) => x.id === item.id);
         return fresh ? { ...fresh, ...item, img: fresh.img, name: fresh.name } : item;
       });
+      for (const key of ['seasonings', 'sauces', 'drinks']) {
+        db.menu[key] = (db.menu[key] || defaults[key]).map((item) => {
+          const fresh = defaults[key].find((x) => x.id === item.id);
+          return fresh ? { ...fresh, ...item, name: fresh.name } : item;
+        });
+      }
+      db.maintenance = { enabled: false, ordering: true, delivery: true, returnAt: '', ...(db.maintenance || {}), message: { uz: '', ru: '', en: '', ar: '', ...(db.maintenance?.message || {}) } };
       return db;
     }
   } catch {}
