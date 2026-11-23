@@ -1,0 +1,12 @@
+{
+  "name": "karto",
+  "private": true,
+  "description": "KARTO — website, customer app (PWA), POS, kitchen display, TV board and owner control center",
+  "scripts": {
+    "setup": "cd server && npm install && cd ../web && npm install",
+    "build": "cd web && npm run build",
+    "start": "cd server && node --no-warnings index.js",
+    "dev": "cd server && node --no-warnings --watch index.js"
+  },
+  "engines": { "node": ">=22.13" }
+}
