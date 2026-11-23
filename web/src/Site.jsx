@@ -10,7 +10,7 @@ const Reveal = ({ children, delay = 0, y = 30, className }) => (
     transition={{ duration: 0.6, delay, ease: [0.2, 0.8, 0.2, 1] }}>{children}</motion.div>
 );
 
-const sizeBg = { s: 'var(--yellow)', m: 'var(--orange)', l: 'var(--red)' };
+const sizeBg = { s: '#fff', m: '#fff', l: '#fff' };
 
 function Cup({ h, color }) {
   return (
@@ -107,10 +107,10 @@ export default function Site() {
           <div className="sizes">
             {menu.sizes.map((s, i) => (
               <Reveal key={s.id} delay={i * 0.1}>
-                <div className="size" style={{ background: sizeBg[s.id], color: s.id === 's' ? 'var(--ink)' : '#fff' }}>
-                  <div className="size__cup"><Cup h={110 + i * 40} color={s.id === 's' ? '#FFF4E0' : sizeBg[s.id]} /></div>
+                <div className="size">
+                  <img className="size__photo" src={s.img} alt={L(s.package)} loading="lazy" />
                   <h3>{L(s.name)}</h3>
-                  <div className="size__g">{s.grams} g</div>
+                  <div className="size__g">{s.grams} g · {L(s.package)}</div>
                   <div className="size__p">{fmt(s.price, lang)}</div>
                 </div>
               </Reveal>
@@ -168,7 +168,7 @@ export default function Site() {
             <div className="phone"><div className="phone__screen">
               <div style={{ background: 'var(--green-d)', padding: '28px 16px 14px' }}><Logo size={24} /></div>
               <div style={{ padding: 14 }}>
-                <div className="promo" style={{ minHeight: 190 }}><img src="/img/cone-sm.webp" alt="" style={{ width: '58%' }} />
+                <div className="promo" style={{ minHeight: 190 }}><img src="/img/karto-medium.png" alt="" style={{ width: '58%' }} />
                   <div className="promo__txt" style={{ padding: 16 }}><h2 style={{ fontSize: 22 }}>{t('whatToday')}</h2></div></div>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 8, marginTop: 14 }}>
                   {menu.sizes.map((s) => <div key={s.id} className="opt" style={{ background: sizeBg[s.id], color: s.id === 's' ? 'var(--ink)' : '#fff', fontSize: 13 }}>{L(s.name)}</div>)}

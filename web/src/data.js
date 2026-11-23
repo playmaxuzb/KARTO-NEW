@@ -4,14 +4,14 @@ export const DEFAULT_MENU = {
   extraSeasoningPrice: 2000,
   maxSeasonings: 3,
   sizes: [
-    { id: 's', grams: 100, price: 18000, color: 'yellow', name: { uz: 'Kichik', ru: 'Маленький', en: 'Small' } },
-    { id: 'm', grams: 150, price: 25000, color: 'orange', name: { uz: 'O‘rta', ru: 'Средний', en: 'Medium' } },
-    { id: 'l', grams: 200, price: 32000, color: 'red', name: { uz: 'Katta', ru: 'Большой', en: 'Large' } },
+    { id: 's', grams: 100, price: 18000, color: 'yellow', img: '/img/karto-small.png', package: { uz: 'Kichik sousli quti', ru: 'Маленькая коробка с соусом', en: 'Compact pack with attached dip' }, name: { uz: 'Kichik', ru: 'Маленький', en: 'Small' } },
+    { id: 'm', grams: 150, price: 25000, color: 'orange', img: '/img/karto-medium.png', package: { uz: 'Oq dumaloq kosa', ru: 'Белая круглая чаша', en: 'Round white bowl' }, name: { uz: 'O‘rta', ru: 'Средний', en: 'Medium' } },
+    { id: 'l', grams: 200, price: 32000, color: 'red', img: '/img/karto-large.png', package: { uz: 'Sirpanma qopqoqli keng quti', ru: 'Широкая коробка с выдвижной крышкой', en: 'Wide box with sliding lid' }, name: { uz: 'Katta', ru: 'Большой', en: 'Large' } },
   ],
   packaging: [
-    { id: 'bowl', img: '/img/bowl.webp', name: { uz: 'Aralashtirish kosasi', ru: 'Круглая чаша', en: 'Shake bowl' }, desc: { uz: 'Ziravor bilan silkitish uchun', ru: 'Чтобы встряхнуть со специями', en: 'Made for shaking with seasoning' } },
-    { id: 'tray', img: '/img/tray.webp', name: { uz: 'Sousli patnis', ru: 'Лоток для соусов', en: 'Sauce tray' }, desc: { uz: 'Sous quyish uchun keng', ru: 'Широкий — для соусов сверху', en: 'Wide, for sauce on top' } },
-    { id: 'cone', img: '/img/cone.webp', name: { uz: 'Qog‘oz konus', ru: 'Бумажный рожок', en: 'Paper cone' }, desc: { uz: 'Yo‘lda yeyish uchun', ru: 'Удобно есть на ходу', en: 'Easy to eat on the go' } },
+    { id: 'bowl', img: '/img/karto-medium.png', thumb: '/img/karto-medium.png', name: { uz: 'Oq dumaloq kosa', ru: 'Белая круглая чаша', en: 'Medium round bowl' }, desc: { uz: 'O‘rta hajm', ru: 'Средний размер', en: 'Medium size' } },
+    { id: 'tray', img: '/img/karto-large.png', thumb: '/img/karto-large.png', name: { uz: 'Sirpanma qopqoqli quti', ru: 'Коробка с выдвижной крышкой', en: 'Large sliding box' }, desc: { uz: 'Katta hajm, ziravor bo‘limlari bilan', ru: 'Большой размер с отделениями для специй', en: 'Large size with seasoning wells' } },
+    { id: 'cone', img: '/img/karto-small.png', thumb: '/img/karto-small.png', name: { uz: 'Kichik sousli quti', ru: 'Маленькая коробка с соусом', en: 'Small pack with attached dip' }, desc: { uz: 'Kichik hajm, sous yonida biriktirilgan', ru: 'Маленький размер, соус закреплён сбоку', en: 'Compact size with attached dip' } },
   ],
   seasonings: [
     { id: 'classic', color: '#F3E6C8', name: { uz: 'Tuz va qalampir', ru: 'Соль и перец', en: 'Salt & Pepper' } },
@@ -35,9 +35,9 @@ export const DEFAULT_MENU = {
     { id: 'lemonade', price: 14000, name: { uz: 'Limonad', ru: 'Лимонад', en: 'Lemonade' } },
   ],
   combos: [
-    { id: 'c1', size: 'm', packaging: 'bowl', seasonings: ['cheddar', 'chili'], sauces: ['mayo'], img: '/img/bowl.webp', name: { uz: 'Pishloqli olov', ru: 'Сырный огонь', en: 'Cheesy Fire' } },
-    { id: 'c2', size: 'l', packaging: 'tray', seasonings: ['bbq', 'parmesan'], sauces: ['bbq'], img: '/img/tray.webp', name: { uz: 'BBQ patnis', ru: 'BBQ-лоток', en: 'BBQ Loaded Tray' } },
-    { id: 'c3', size: 's', packaging: 'cone', seasonings: ['peri'], sauces: ['ketchup'], img: '/img/cone.webp', name: { uz: 'Peri konus', ru: 'Пери-рожок', en: 'Peri Cone' } },
+    { id: 'c1', size: 'm', packaging: 'bowl', seasonings: ['cheddar', 'chili'], sauces: ['mayo'], img: '/img/karto-medium.png', name: { uz: 'Pishloqli olov', ru: 'Сырный огонь', en: 'Cheesy Fire' } },
+    { id: 'c2', size: 'l', packaging: 'tray', seasonings: ['bbq', 'parmesan'], sauces: ['bbq'], img: '/img/karto-large.png', name: { uz: 'BBQ katta quti', ru: 'BBQ в большой коробке', en: 'BBQ Large Box' } },
+    { id: 'c3', size: 's', packaging: 'cone', seasonings: ['peri'], sauces: ['ketchup'], img: '/img/karto-small.png', name: { uz: 'Peri kichik quti', ru: 'Пери в маленькой коробке', en: 'Peri Small Pack' } },
   ],
 };
 

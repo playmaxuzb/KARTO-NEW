@@ -11,14 +11,6 @@ const Admin = lazy(() => import('./Admin.jsx'));
 const DemoHub = lazy(() => import('./demo/DemoHub.jsx'));
 if (DEMO) { const { installDemoServer } = await import('./demo/mockServer.js'); installDemoServer(); document.documentElement.classList.add('demo'); }
 
-function LinkCatcher() {
-  const nav = useNavigate();
-  useEffect(() => {
-    const h = (e) => { const a = e.target.closest && e.target.closest('a[href^="/"]'); if (!a || a.getAttribute('href').startsWith('//')) return; e.preventDefault(); nav(a.getAttribute('href')); window.scrollTo(0, 0); };
-    document.addEventListener('click', h); return () => document.removeEventListener('click', h);
-  }, []);
-  return null;
-}
 function DemoBack() {
   const loc = useLocation(); const nav = useNavigate();
   if (loc.pathname === '/') return null;
@@ -28,7 +20,7 @@ const Router = DEMO ? MemoryRouter : BrowserRouter;
 createRoot(document.getElementById('root')).render(
   <LangProvider>
     <Router>
-      {DEMO && <LinkCatcher />}{DEMO && <DemoBack />}
+      {DEMO && <DemoBack />}
       <Suspense fallback={null}>
         <Routes>
           <Route path="/" element={DEMO ? <DemoHub /> : <Site />} />

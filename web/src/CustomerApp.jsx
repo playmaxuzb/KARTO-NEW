@@ -6,7 +6,7 @@ import { useLang, LangSwitch } from './i18n.jsx';
 import { fmt } from './data.js';
 import { api, cartStore, linePrice, useCart, useMenu, useLive } from './api.js';
 
-const SIZE_BG = { s: 'var(--yellow)', m: 'var(--orange)', l: 'var(--red)' };
+const SIZE_BG = { s: '#fff', m: '#fff', l: '#fff' };
 const myOrders = { get: () => { try { return JSON.parse(localStorage.getItem('karto-my-orders') || '[]'); } catch { return []; } },
   add: (ref) => { try { localStorage.setItem('karto-my-orders', JSON.stringify([ref, ...myOrders.get()].slice(0, 30))); } catch {} } };
 
@@ -42,7 +42,7 @@ function Home() {
         <div><div className="muted" style={{ fontSize: 15 }}>{t('hi')}</div><h2 style={{ fontSize: 26, fontWeight: 900 }}>{t('whatToday')}</h2></div>
       </div>
       <div className="promo">
-        <img src="/img/cone-sm.webp" alt="" />
+        <img src="/img/karto-medium.png" alt="" />
         <div className="promo__txt">
           <span className="kicker" style={{ color: 'var(--yellow)', fontSize: 12 }}><Sparkle size={14} /> Made Your Way</span>
           <h2 style={{ marginTop: 8 }}>{t('build')}<em>KARTO!</em></h2>
@@ -52,7 +52,8 @@ function Home() {
       <div className="h-title">{t('chooseSize')}</div>
       <div className="opt-grid opt-grid--3">
         {menu.sizes.map((s) => (
-          <button key={s.id} className="opt" style={{ background: SIZE_BG[s.id], color: s.id === 's' ? 'var(--ink)' : '#fff' }} onClick={() => nav('/app/build?size=' + s.id)}>
+          <button key={s.id} className="opt opt--size" onClick={() => nav('/app/build?size=' + s.id)}>
+            <img src={s.img} alt={L(s.package)} loading="lazy" />
             <div style={{ fontFamily: 'var(--display)', fontWeight: 900, fontSize: 18 }}>{L(s.name)}</div>
             <div style={{ fontSize: 13 }}>{s.grams} g</div>
             <div style={{ fontSize: 13, marginTop: 4 }}>{fmt(s.price, lang)}</div>
@@ -107,7 +108,7 @@ function Build() {
   const { t, L, lang } = useLang(); const menu = useMenu(); const nav = useNavigate(); const [q] = useSearchParams();
   const combo = menu.combos.find((c) => c.id === q.get('combo'));
   const [size, setSize] = useState(combo?.size || q.get('size') || 'm');
-  const [pack, setPack] = useState(combo?.packaging || 'bowl');
+  const pack = { s: 'cone', m: 'bowl', l: 'tray' }[size] || 'bowl';
   const [seas, setSeas] = useState(combo?.seasonings || ['classic']);
   const [sauces, setSauces] = useState(combo ? Object.fromEntries(combo.sauces.map((s) => [s, 1])) : {});
   const [drinks, setDrinks] = useState({});
@@ -115,7 +116,7 @@ function Build() {
   const max = menu.maxSeasonings || 3;
   const item = { size, packaging: pack, seasonings: seas, sauces, drinks, qty: 1 };
   const price = linePrice(item, menu);
-  const img = menu.packaging.find((p) => p.id === pack)?.img;
+  const img = menu.sizes.find((s) => s.id === size)?.img;
   const toggle = (id) => setSeas((cur) => (cur.includes(id) ? (cur.length > 1 ? cur.filter((x) => x !== id) : cur) : cur.length < max ? [...cur, id] : cur));
   const add = () => { cartStore.add(item); setAdded(true); setTimeout(() => nav('/app/cart'), 650); };
   const avail = (x) => x.available !== false;
@@ -131,26 +132,16 @@ function Build() {
       <div className="sec-title"><h3>1. {t('chooseSize')}</h3></div>
       <div className="opt-grid opt-grid--3">
         {menu.sizes.filter(avail).map((s) => (
-          <button key={s.id} type="button" className="opt" aria-pressed={size === s.id} onClick={() => setSize(s.id)}
-            style={{ background: size === s.id ? SIZE_BG[s.id] : 'var(--paper)', color: size === s.id && s.id !== 's' ? '#fff' : 'var(--ink)' }}>
+          <button key={s.id} type="button" className="opt opt--size" aria-pressed={size === s.id} onClick={() => setSize(s.id)}>
             {size === s.id && <span className="opt__check">✓</span>}
+            <img src={s.img} alt={L(s.package)} loading="lazy" />
             <div style={{ fontFamily: 'var(--display)', fontWeight: 900, fontSize: 17 }}>{L(s.name)}</div>
             <div style={{ fontSize: 13 }}>{s.grams} g</div><div style={{ fontSize: 13 }}>{fmt(s.price, lang)}</div>
           </button>
         ))}
       </div>
 
-      <div className="sec-title"><h3>2. {t('choosePack')}</h3></div>
-      <div className="opt-grid opt-grid--3">
-        {menu.packaging.filter(avail).map((p) => (
-          <button key={p.id} type="button" className="opt" aria-pressed={pack === p.id} onClick={() => setPack(p.id)} style={{ padding: 8, background: pack === p.id ? 'var(--yellow)' : 'var(--paper)' }}>
-            {pack === p.id && <span className="opt__check">✓</span>}
-            <img src={p.img.replace('.webp', '-sm.webp')} alt="" /><div style={{ fontSize: 13, lineHeight: 1.2 }}>{L(p.name)}</div>
-          </button>
-        ))}
-      </div>
-
-      <div className="sec-title"><h3>3. {t('chooseSeason')}</h3><span className="counter">{seas.length}/{max}</span></div>
+      <div className="sec-title"><h3>2. {t('chooseSeason')}</h3><span className="counter">{seas.length}/{max}</span></div>
       <p className="muted" style={{ margin: '0 0 10px', fontSize: 14 }}>{t('upTo3')} · {t('firstFree')}, +{fmt(menu.extraSeasoningPrice, lang)}</p>
       <div className="season-grid">
         {menu.seasonings.filter(avail).map((s) => {
@@ -163,14 +154,14 @@ function Build() {
         })}
       </div>
 
-      <div className="sec-title"><h3>4. {t('addSauce')}</h3></div>
+      <div className="sec-title"><h3>3. {t('addSauce')}</h3></div>
       {menu.sauces.filter(avail).map((s) => (
         <div className="addon" key={s.id}>
           <div className="addon__l"><i className="dot" style={{ background: s.color, width: 26, height: 26 }} /><div>{L(s.name)}<small>+{fmt(s.price, lang)}</small></div></div>
           <Stepper label={L(s.name)} value={sauces[s.id] || 0} onChange={(v) => setSauces({ ...sauces, [s.id]: v })} />
         </div>
       ))}
-      <div className="sec-title"><h3>5. {t('addDrink')}</h3></div>
+      <div className="sec-title"><h3>4. {t('addDrink')}</h3></div>
       {menu.drinks.filter(avail).map((s) => (
         <div className="addon" key={s.id}>
           <div className="addon__l"><div>{L(s.name)}<small>+{fmt(s.price, lang)}</small></div></div>
